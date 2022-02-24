@@ -49,4 +49,11 @@ public class LivroController {
         return new ResponseEntity<>(repositorio.save(livro), HttpStatus.CREATED);
         
     }
+
+    @PostMapping
+    public ResponseEntity<Livro> atualizarLivro(@RequestBody Livro livro){
+
+        return new ResponseEntity<>(repositorio.save(livro), HttpStatus.CREATED);
+        
+    }
 }
