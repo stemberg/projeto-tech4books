@@ -1,11 +1,7 @@
-package br.com.tech4me.tech4books.model;
+package br.com.tech4me.tech4books.dto;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+public class LivroDTO {
 
-@Document("livros")
-public class Livro {
-    @Id
     private String id;
     private String titulo;
     private String autor;
@@ -14,70 +10,54 @@ public class Livro {
     private Double valor;
     private Double precoCusto;
     private Double margemLucro;
-
+    
     public String getId() {
         return id;
     }
-
     public void setId(String id) {
         this.id = id;
     }
-
-
-    public Double getMargemLucro() {
-        return margemLucro;
-    }
-
-    public void setMargemLucro(Double margemLucro) {
-        this.margemLucro = margemLucro;
-    }
-
-    public Double getPrecoCusto() {
-        return precoCusto;
-    }
-
-    public void setPrecoCusto(Double precoCusto) {
-        this.precoCusto = precoCusto;
-    }
-
-    public Double getValor() {
-        return valor;
-    }
-
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
-    
     public String getTitulo() {
         return titulo;
     }
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
-
     public String getAutor() {
         return autor;
     }
-
     public void setAutor(String autor) {
         this.autor = autor;
     }
-
     public String getEditora() {
         return editora;
     }
-
     public void setEditora(String editora) {
         this.editora = editora;
     }
-
     public Integer getAnoLancamento() {
         return anoLancamento;
     }
-
     public void setAnoLancamento(Integer anoLancamento) {
         this.anoLancamento = anoLancamento;
+    }
+    public Double getValor() {
+        return valor;
+    }
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+    public Double getPrecoCusto() {
+        return precoCusto;
+    }
+    public void setPrecoCusto(Double precoCusto) {
+        this.precoCusto = precoCusto;
+    }
+    public Double getMargemLucro() {
+        return margemLucro;
+    }
+    public void setMargemLucro(Double margemLucro) {
+        this.margemLucro = margemLucro;
     }
     
 }
