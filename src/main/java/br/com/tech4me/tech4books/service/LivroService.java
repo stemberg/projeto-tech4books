@@ -4,19 +4,17 @@ import java.util.List;
 import java.util.Optional;
 
 import br.com.tech4me.tech4books.dto.LivroDTO;
-import br.com.tech4me.tech4books.model.Livro;
-
 
 public interface LivroService {
 
     List<LivroDTO> obterTodosOsLivros();
 
-    Optional<Livro> obterLivroPorId(String id);
+    Optional<LivroDTO> obterLivroPorId(String id);
 
-    Livro armazenarLivro(Livro livro);
+    LivroDTO armazenarLivro(LivroDTO livro);
 
     void excluirLivroPorId(String id);
 
-    Livro atualizarLivro(String id, Livro livro);
+    LivroDTO atualizarLivro(String id, LivroDTO livro);
 
 }

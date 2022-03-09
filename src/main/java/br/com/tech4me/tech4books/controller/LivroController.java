@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,10 +23,13 @@ import br.com.tech4me.tech4books.dto.LivroDTO;
 import br.com.tech4me.tech4books.model.Livro;
 import br.com.tech4me.tech4books.service.LivroService;
 import br.com.tech4me.tech4books.view.model.LivroResponseDTO;
+import br.com.tech4me.tech4books.view.model.LivroResponsePorIdDTO;
 
 @RestController
 @RequestMapping("/api/livros")
 public class LivroController {
+
+    ModelMapper mapper = new ModelMapper();
 
     @Autowired
     private LivroService servico;
@@ -32,8 +37,6 @@ public class LivroController {
     @GetMapping
     public ResponseEntity<List<LivroResponseDTO>> obterLivros() {
         List<LivroDTO> dto = servico.obterTodosOsLivros();
-
-        ModelMapper mapper = new ModelMapper();
 
         List<LivroResponseDTO> livros = dto.stream()
                 .map(l -> mapper.map(l, LivroResponseDTO.class))
@@ -44,12 +47,12 @@ public class LivroController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Livro> obterLivroPorId(@PathVariable String id) {
+    public ResponseEntity<LivroResponsePorIdDTO> obterLivroPorId(@PathVariable String id) {
         
-        Optional<Livro> livro = servico.obterLivroPorId(id);
+        Optional<LivroDTO> livro = servico.obterLivroPorId(id);
 
         if(livro.isPresent()) {
-            return new ResponseEntity<>(livro.get(), HttpStatus.FOUND);
+            return new ResponseEntity<>(mapper.map(livro.get(), LivroResponsePorIdDTO.class), HttpStatus.FOUND);
         }
 
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -57,7 +60,7 @@ public class LivroController {
     }
 
     @PostMapping
-    public ResponseEntity<Livro> cadastrarLivro(@RequestBody Livro livro){
+    public ResponseEntity<LivroDTO> cadastrarLivro(@RequestBody @Valid LivroDTO livro){
 
         return new ResponseEntity<>(servico.armazenarLivro(livro), HttpStatus.CREATED);
         
@@ -72,7 +75,7 @@ public class LivroController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Livro> atualizarLivro(@PathVariable String id, @RequestBody Livro livro) {
+    public ResponseEntity<LivroDTO> atualizarLivro(@PathVariable String id, @RequestBody @Valid LivroDTO livro) {
         
         return new ResponseEntity<>(servico.atualizarLivro(id, livro), HttpStatus.ACCEPTED);
         
