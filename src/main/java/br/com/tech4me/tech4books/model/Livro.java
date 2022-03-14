@@ -23,7 +23,6 @@ public class Livro {
         this.id = id;
     }
 
-
     public Double getMargemLucro() {
         return margemLucro;
     }
